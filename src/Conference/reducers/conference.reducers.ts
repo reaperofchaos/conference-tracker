@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { type ConferenceState } from '../types';
 
 const initialState: ConferenceState = {
-  conferences: {}
+  conferences: {},
 };
 
 export const conferenceSlice = createSlice({
@@ -18,10 +18,17 @@ export const conferenceSlice = createSlice({
     },
     addConference: (state, action) => {
       state.conferences[action.payload.id] = action.payload
-    }
+    },
   }
 });
 
-export const { setConferences, addConference, createConference, getAllConferences, getConferenceById } = conferenceSlice.actions;
+export const { 
+   setConferences,
+   addConference, 
+   createConference, 
+   getAllConferences, 
+   getConferenceById,
+   updateConference 
+  } = conferenceSlice.actions;
 
 export default conferenceSlice.reducer;

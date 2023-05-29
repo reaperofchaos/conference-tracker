@@ -1,14 +1,15 @@
 export interface Conference {
-  name: string
-  description?: string
-  website?: string
-  location?: LocationData
-  dateStart?: Date
-  dateEnd?: Date
+  id: string;
+  name: string;
+  description?: string;
+  website?: string;
+  location?: LocationData;
+  dateStart?: Date;
+  dateEnd?: Date;
 };
 
 export interface LocationData {
-  city?: string
-  state?: string
-  country?: string
+  city?: string;
+  state?: string;
+  country?: string;
 }

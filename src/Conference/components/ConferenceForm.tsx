@@ -5,9 +5,9 @@ import { type Conference, type LocationData } from '../types';
 import { DatePicker } from '@mui/x-date-pickers';
 import { type ConferenceFormProps } from '../types/conference.props.types';
 
-const ConferenceForm = ({ submit }: ConferenceFormProps) => {
-  const [name, setName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
+const ConferenceForm = ({ submit, cancel}: ConferenceFormProps) => {
+  const [name, setName] = useState<string| undefined>(undefined);
+  const [description, setDescription] = useState<string | undefined>(undefined);
   const [location, setLocation] = useState<LocationData | undefined>(undefined)
   const [startDate, setStartData] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
@@ -30,9 +30,18 @@ const ConferenceForm = ({ submit }: ConferenceFormProps) => {
     setLocation(updatedLocation);
   }
 
+  const clearForm = ()=>{
+    setName(undefined); 
+    setDescription(undefined); 
+    setLocation(undefined);
+    setStartData(new Date());
+    setEndDate(new Date()); 
+  }
+
   const handleSubmit = () => {
-    if (name !== '') {
+    if (name) {
       const conference: Conference = {
+        id: "new",
         name,
         description,
         location,
@@ -40,6 +49,7 @@ const ConferenceForm = ({ submit }: ConferenceFormProps) => {
         dateEnd: endDate ?? undefined
       }
       submit(conference);
+      clearForm(); 
     }
   }
   return (
@@ -64,7 +74,11 @@ const ConferenceForm = ({ submit }: ConferenceFormProps) => {
                 <DatePicker label="Start Date" value={startDate} onChange={(newValue) => { setStartData(newValue) }} />
                 <DatePicker label="End Date" value={endDate} onChange={(newValue) => { setEndDate(newValue) }} />
             </Box>
-            <Button onClick={() => handleSubmit()}>Submit</Button>
+            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+              <Button sx={{paddingRight: '10px'}}color="secondary" onClick={() => handleSubmit()}>Cancel</Button>
+              <Button onClick={() => handleSubmit()}>Submit</Button>
+            </Box>
+            
         </Box>
   )
 }

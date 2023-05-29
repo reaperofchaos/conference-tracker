@@ -4,7 +4,7 @@ import { type ConferenceTileProps } from '../types/conference.props.types';
 
 const ConferenceTile = ({ conference }: ConferenceTileProps) => {
   return (
-        <Card>
+        <Card onClick={()=>{}}>
             <CardHeader title={conference.name} />
         </Card>
   )

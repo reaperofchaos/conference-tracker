@@ -2,6 +2,7 @@ import { type Conference } from './conference.types';
 
 export interface ConferenceFormProps {
   submit: (value: Conference) => void
+  cancel: ()=>void; 
 }
 
 export interface ConferenceTileProps {
