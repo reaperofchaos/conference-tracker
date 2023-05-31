@@ -7,7 +7,7 @@ const ConferenceList = ({ conferences }: ConferenceListProps) => {
   const keys = Object.keys(conferences);
 
   return (
-        <Box sx={{display: 'flex', flexDirection: "row", flexWrap: "wrap"}}>
+        <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
             {keys.map((key) =>
               (<ConferenceTile key={key} conference={conferences[key]}/>)
             )}

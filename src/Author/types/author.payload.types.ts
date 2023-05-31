@@ -1,9 +1,9 @@
-import { Author } from "../../Presentation/types/Presentation.types";
+import { type Author } from './author.types'
 
-export interface CreateNewAuthorPayload{
-    author: Author
+export interface CreateNewAuthorPayload {
+  author: Author
 }
 
-export interface FetchAuthorByIdPayload{
-    id: string; 
+export interface FetchAuthorByIdPayload {
+  id: string
 }

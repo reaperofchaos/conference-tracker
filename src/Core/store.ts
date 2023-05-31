@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import conference from '../Conference/reducers/conference.reducers'
 import author from '../Author/reducers/author.reducers'
@@ -10,22 +10,25 @@ import presentationSagas from '../Presentation/sagas/presentation.sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
+const rootReducer = combineReducers({
+  conference,
+  author,
+  presentation
+})
+
 const store = configureStore({
-  reducer: {
-    conference,
-    author,
-    presentation
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware)
+    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware)
 });
 
-function* rootSagas(){
-  yield all({...authorSagas,
+function * rootSagas () {
+  yield all({
+    ...authorSagas,
     ...conferenceSagas,
     ...presentationSagas
   }
-    )
+  )
 }
 sagaMiddleware.run(rootSagas);
 

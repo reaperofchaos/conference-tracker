@@ -1,6 +1,6 @@
-import { Author } from "../../Presentation/types/Presentation.types";
+import { type Author } from './author.types'
 
-export interface AuthorFormProps{
-    submit: (value: Author)=>void; 
-    cancel: ()=>void;
+export interface AuthorFormProps {
+  submit: (value: Author) => void
+  cancel: () => void
 }

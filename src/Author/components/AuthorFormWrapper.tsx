@@ -1,18 +1,19 @@
-import { useDispatch } from "react-redux";
-import AuthorForm from "./AuthorForm";
-import { createAuthor } from "../reducers/author.reducers";
-import { Author } from "../types";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import AuthorForm from './AuthorForm';
+import { createAuthor } from '../reducers/author.reducers';
+import { type Author } from '../types';
 
-const AuthorFormWrapper = ()=>{
-    const dispatch = useDispatch(); 
-    const submit = (value: Author)=>{
-        dispatch(createAuthor({author: value}))
-    }
-    const cancel = ()=>{}
+const AuthorFormWrapper = () => {
+  const dispatch = useDispatch();
+  const submit = (value: Author) => {
+    dispatch(createAuthor({ author: value }))
+  }
+  const cancel = () => {}
 
-    return (
+  return (
         <AuthorForm submit={submit} cancel={cancel}/>
-    )
+  )
 }
 
 export default AuthorFormWrapper;

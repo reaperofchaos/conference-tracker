@@ -2,11 +2,11 @@ import React, { type ChangeEvent, useState } from 'react';
 import _ from 'lodash';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { type Conference, type LocationData } from '../types';
-import { DatePicker } from '@mui/x-date-pickers';
 import { type ConferenceFormProps } from '../types/conference.props.types';
+import DateSelector from '../../Core/DateSelector';
 
-const ConferenceForm = ({ submit, cancel}: ConferenceFormProps) => {
-  const [name, setName] = useState<string| undefined>(undefined);
+const ConferenceForm = ({ submit, cancel }: ConferenceFormProps) => {
+  const [name, setName] = useState<string | undefined>(undefined);
   const [description, setDescription] = useState<string | undefined>(undefined);
   const [location, setLocation] = useState<LocationData | undefined>(undefined)
   const [startDate, setStartData] = useState<Date | null>(new Date());
@@ -30,18 +30,18 @@ const ConferenceForm = ({ submit, cancel}: ConferenceFormProps) => {
     setLocation(updatedLocation);
   }
 
-  const clearForm = ()=>{
-    setName(undefined); 
-    setDescription(undefined); 
+  const clearForm = () => {
+    setName(undefined);
+    setDescription(undefined);
     setLocation(undefined);
     setStartData(new Date());
-    setEndDate(new Date()); 
+    setEndDate(new Date());
   }
 
   const handleSubmit = () => {
-    if (name) {
+    if (name !== undefined) {
       const conference: Conference = {
-        id: "new",
+        id: 'new',
         name,
         description,
         location,
@@ -49,37 +49,40 @@ const ConferenceForm = ({ submit, cancel}: ConferenceFormProps) => {
         dateEnd: endDate ?? undefined
       }
       submit(conference);
-      clearForm(); 
+      clearForm();
     }
   }
   return (
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography variant="h3">Add a Conference</Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Typography>Name</Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '20px', alignItems: 'center' }}>
+            <Typography variant="h3" sx={{ marginBottom: '20px' }}>Add a Conference</Typography>
+            <Box sx={{ width: '55vw' }}>
+
+            <Box sx={{ display: 'flex', flexDirection: 'row', columnGap: '10px', margin: '10px' }}>
+                <Typography sx={{ width: '10vw' }}>Name</Typography>
                 <TextField value={name} onChange={(e) => { setName(e.target.value); }}/>
             </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Typography>Description</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row', columnGap: '10px', margin: '10px' }}>
+                <Typography sx={{ width: '10vw' }}>Description</Typography>
                 <TextField value={description} onChange={(e) => { setDescription(e.target.value); }}/>
             </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Typography>Location</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row', columnGap: '10px', margin: '10px' }}>
+                <Typography sx={{ width: '10vw' }}>Location</Typography>
                 <TextField label="City" value={(location != null) ? location.city : ''} onChange={handleCityChange}/>
                 <TextField label="State" value={(location != null) ? location.state : ''} onChange={handleStateChange}/>
                 <TextField label="Country" value={(location != null) ? location.country : ''} onChange={handleCountryChange}/>
             </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Typography>Dates</Typography>
-                <DatePicker label="Start Date" value={startDate} onChange={(newValue) => { setStartData(newValue) }} />
-                <DatePicker label="End Date" value={endDate} onChange={(newValue) => { setEndDate(newValue) }} />
+            <Box sx={{ display: 'flex', flexDirection: 'row', columnGap: '10px', margin: '10px' }}>
+                <Typography sx={{ width: '10vw' }}>Dates</Typography>
+                <DateSelector label="Start Date" value={startDate} onChange={(newValue) => { setStartData(newValue) }} />
+                <DateSelector label="End Date" value={endDate} onChange={(newValue) => { setEndDate(newValue) }} />
             </Box>
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-              <Button sx={{paddingRight: '10px'}}color="secondary" onClick={() => handleSubmit()}>Cancel</Button>
-              <Button onClick={() => handleSubmit()}>Submit</Button>
+            <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'end', marginTop: '20px', columnGap: '20px' }}>
+              <Button color="secondary" variant="contained" sx={{ paddingRight: '10px' }} onClick={() => handleSubmit()}>Cancel</Button>
+              <Button color="primary" variant="contained" onClick={() => handleSubmit()}>Submit</Button>
             </Box>
-            
-        </Box>
+                        </Box>
+
+          </Box>
   )
 }
 

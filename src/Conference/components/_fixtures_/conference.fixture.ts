@@ -1,6 +1,7 @@
 import { type Conference } from '../../types/conference.types';
 
 export const conferenceExample: Conference = {
+  id: '1',
   name: 'RenderATL',
   description: '',
   website: 'https://www.renderatl.com',
